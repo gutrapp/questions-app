@@ -1,0 +1,25 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "sqlite" //For mongo implementation change to mongodb here
+  url      = env("DATABASE_URL")
+}
+
+model Question {
+  id      Int    @id @default(autoincrement()) //Mongo: @id @default(auto()) @map("_id") @db.ObjectId
+  author  String
+  content String
+  likes   Int    @default(0)
+  secret  String
+}
+
+model Answer {
+  id          Int    @id @default(autoincrement()) //Mongo: @id @default(auto()) @map("_id") @db.ObjectId
+  author      String
+  content     String
+  likes       Int    @default(0)
+  question_id Int
+  secret      String
+}
